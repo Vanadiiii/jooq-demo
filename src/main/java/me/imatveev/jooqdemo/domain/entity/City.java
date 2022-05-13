@@ -7,4 +7,5 @@ public class City {
     private Long id;
     private Long countryId;
     private String name;
+    private Integer population;
 }
