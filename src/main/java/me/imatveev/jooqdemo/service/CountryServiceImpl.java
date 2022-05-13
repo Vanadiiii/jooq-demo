@@ -22,7 +22,7 @@ public class CountryServiceImpl implements CountryService {
     @Override
     public Country findById(Long id) throws CountryNotFoundException {
         return repository.find(id)
-                .orElseThrow(() -> new CountryNotFoundException("Can't found country with id - " + id));
+                .orElseThrow(() -> new CountryNotFoundException(id));
     }
 
     @Override
@@ -33,7 +33,7 @@ public class CountryServiceImpl implements CountryService {
     @Override
     public void deleteById(Long id) throws CountryNotFoundException {
         if (!repository.delete(id)) {
-            throw new CountryNotFoundException("Can't found country with id - " + id);
+            throw new CountryNotFoundException(id);
         }
     }
 
