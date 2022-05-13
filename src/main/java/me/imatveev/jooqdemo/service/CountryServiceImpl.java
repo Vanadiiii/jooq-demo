@@ -26,6 +26,11 @@ public class CountryServiceImpl implements CountryService {
     }
 
     @Override
+    public long calculatePopulation(Long id) {
+        return repository.calculatePopulation(id);
+    }
+
+    @Override
     public Country save(Country country) {
         return repository.insert(country);
     }

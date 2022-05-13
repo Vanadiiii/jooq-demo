@@ -10,12 +10,14 @@ import org.jooq.DSLContext;
 import org.jooq.exception.DataAccessException;
 import org.springframework.stereotype.Repository;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
 import static me.imatveev.jooqdemo.domain.tables.Cities.CITIES;
 import static me.imatveev.jooqdemo.domain.tables.Countries.COUNTRIES;
+import static org.jooq.impl.DSL.sum;
 
 @Repository
 @RequiredArgsConstructor
@@ -63,6 +65,15 @@ public class CountryRepositoryImpl implements CountryRepository {
                     return country;
                 })
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public long calculatePopulation(Long id) {
+        return dsl.select(sum(CITIES.POPULATION))
+                .from(CITIES)
+                .where(CITIES.COUNTRY_ID.eq(id))
+                .fetchOneInto(BigDecimal.class)
+                .longValue();
     }
 
     @Override

@@ -10,6 +10,8 @@ public interface CountryService {
 
     Country findById(Long id) throws CountryNotFoundException;
 
+    long calculatePopulation(Long id);
+
     Country save(Country country);
 
     void deleteById(Long id) throws CountryNotFoundException;

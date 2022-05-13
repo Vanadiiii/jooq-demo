@@ -23,6 +23,11 @@ public class CountryController {
         return countryService.findById(id);
     }
 
+    @GetMapping("/{id}/population")
+    public long calculatePopulation(@PathVariable Long id) {
+        return countryService.calculatePopulation(id);
+    }
+
     @PostMapping
     public Country save(@RequestBody Country country) {
         return countryService.save(country);

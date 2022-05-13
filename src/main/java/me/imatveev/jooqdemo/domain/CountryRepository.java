@@ -10,6 +10,8 @@ public interface CountryRepository {
 
     List<Country> findAll();
 
+    long calculatePopulation(Long id);
+
     Country insert(Country t);
 
     Country update(Country t);
