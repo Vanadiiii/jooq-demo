@@ -7,9 +7,15 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/countries")
 public record CountryController(CountryRepository repository) {
+    @GetMapping
+    public List<Country> findAll() {
+        return repository.findAll();
+    }
 
     @GetMapping("/{id}")
     public Country findById(@PathVariable Long id) {

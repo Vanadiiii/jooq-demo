@@ -17,3 +17,6 @@ spring:
   jooq:
     sql-dialect: postgres
 
+logging:
+  level:
+    org.jooq.tools.LoggerListener: debug
