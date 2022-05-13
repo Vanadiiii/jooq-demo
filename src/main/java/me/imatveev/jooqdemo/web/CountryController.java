@@ -1,43 +1,40 @@
 package me.imatveev.jooqdemo.web;
 
+import lombok.RequiredArgsConstructor;
+import me.imatveev.jooqdemo.domain.CountryService;
 import me.imatveev.jooqdemo.domain.entity.Country;
-import me.imatveev.jooqdemo.repository.CountryRepository;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/api/countries")
-public record CountryController(CountryRepository repository) {
+@RequiredArgsConstructor
+public class CountryController {
+    private final CountryService countryService;
+
     @GetMapping
     public List<Country> findAll() {
-        return repository.findAll();
+        return countryService.findAll();
     }
 
     @GetMapping("/{id}")
     public Country findById(@PathVariable Long id) {
-        return repository.find(id)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Can't found country with id - " + id));
+        return countryService.findById(id);
     }
 
     @PostMapping
     public Country save(@RequestBody Country country) {
-        return repository.insert(country);
+        return countryService.save(country);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteById(@PathVariable Long id) {
-        return ResponseEntity.status(
-                        repository.delete(id) ? HttpStatus.OK : HttpStatus.NOT_FOUND
-                )
-                .build();
+    public void deleteById(@PathVariable Long id) {
+        countryService.deleteById(id);
     }
 
     @PatchMapping
     public Country update(@RequestBody Country country) {
-        return repository.update(country);
+        return countryService.update(country);
     }
 }

@@ -1,11 +1,11 @@
-package me.imatveev.jooqdemo.repository.impl;
+package me.imatveev.jooqdemo.storage;
 
 import lombok.RequiredArgsConstructor;
 import me.imatveev.jooqdemo.domain.entity.City;
 import me.imatveev.jooqdemo.domain.entity.Country;
-import me.imatveev.jooqdemo.repository.CityRepository;
-import me.imatveev.jooqdemo.repository.CountryRepository;
-import me.imatveev.jooqdemo.repository.mapper.CountryRecordMapper;
+import me.imatveev.jooqdemo.domain.CityRepository;
+import me.imatveev.jooqdemo.domain.CountryRepository;
+import me.imatveev.jooqdemo.storage.mapper.CountryRecordMapper;
 import org.jooq.DSLContext;
 import org.jooq.exception.DataAccessException;
 import org.springframework.stereotype.Repository;
@@ -116,7 +116,7 @@ public class CountryRepositoryImpl implements CountryRepository {
     }
 
     @Override
-    public Boolean delete(Long id) {
+    public boolean delete(Long id) {
         return dsl.transactionResult(conf -> {
             final boolean isCountryDeleted = dsl.deleteFrom(COUNTRIES)
                     .where(COUNTRIES.ID.eq(id))

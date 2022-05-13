@@ -1,19 +1,16 @@
-package me.imatveev.jooqdemo.repository.impl;
+package me.imatveev.jooqdemo.storage;
 
 import lombok.RequiredArgsConstructor;
 import me.imatveev.jooqdemo.domain.entity.City;
-import me.imatveev.jooqdemo.domain.entity.Country;
 import me.imatveev.jooqdemo.domain.tables.Cities;
-import me.imatveev.jooqdemo.domain.tables.Countries;
-import me.imatveev.jooqdemo.repository.CityRepository;
-import me.imatveev.jooqdemo.repository.mapper.CityRecordMapper;
+import me.imatveev.jooqdemo.domain.CityRepository;
+import me.imatveev.jooqdemo.storage.mapper.CityRecordMapper;
 import org.jooq.Condition;
 import org.jooq.DSLContext;
 import org.jooq.exception.DataAccessException;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-import java.util.Optional;
 
 @Repository
 @RequiredArgsConstructor

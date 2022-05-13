@@ -1,4 +1,4 @@
-package me.imatveev.jooqdemo.repository;
+package me.imatveev.jooqdemo.domain;
 
 import me.imatveev.jooqdemo.domain.entity.Country;
 
@@ -14,5 +14,5 @@ public interface CountryRepository {
 
     Country update(Country t);
 
-    Boolean delete(Long id);
+    boolean delete(Long id);
 }

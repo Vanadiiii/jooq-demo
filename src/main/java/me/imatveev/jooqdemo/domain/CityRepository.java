@@ -1,4 +1,4 @@
-package me.imatveev.jooqdemo.repository;
+package me.imatveev.jooqdemo.domain;
 
 import me.imatveev.jooqdemo.domain.entity.City;
 import org.jooq.Condition;
