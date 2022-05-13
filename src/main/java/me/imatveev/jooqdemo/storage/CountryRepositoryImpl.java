@@ -72,8 +72,9 @@ public class CountryRepositoryImpl implements CountryRepository {
         return dsl.select(sum(CITIES.POPULATION))
                 .from(CITIES)
                 .where(CITIES.COUNTRY_ID.eq(id))
-                .fetchOneInto(BigDecimal.class)
-                .longValue();
+                .fetchOptionalInto(BigDecimal.class)
+                .map(BigDecimal::longValue)
+                .orElse(0L);
     }
 
     @Override
