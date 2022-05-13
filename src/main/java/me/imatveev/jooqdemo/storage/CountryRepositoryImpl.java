@@ -5,6 +5,7 @@ import me.imatveev.jooqdemo.domain.entity.City;
 import me.imatveev.jooqdemo.domain.entity.Country;
 import me.imatveev.jooqdemo.domain.CityRepository;
 import me.imatveev.jooqdemo.domain.CountryRepository;
+import me.imatveev.jooqdemo.domain.exception.CountryNotFoundException;
 import me.imatveev.jooqdemo.storage.mapper.CountryRecordMapper;
 import org.jooq.DSLContext;
 import org.jooq.exception.DataAccessException;
@@ -72,8 +73,9 @@ public class CountryRepositoryImpl implements CountryRepository {
         return dsl.select(sum(CITIES.POPULATION))
                 .from(CITIES)
                 .where(CITIES.COUNTRY_ID.eq(id))
-                .fetchOneInto(BigDecimal.class)
-                .longValue();
+                .fetchOptionalInto(BigDecimal.class)
+                .map(BigDecimal::longValue)
+                .orElseThrow(() -> new CountryNotFoundException(id));
     }
 
     @Override
